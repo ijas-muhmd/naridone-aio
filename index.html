@@ -12,36 +12,6 @@
   </head>
   <body>
     <div id="root"></div>
-    <script>
-      // #region agent log
-      // Global error handler to catch all JavaScript errors
-      window.addEventListener('error', function(e) {
-        const logDataErr = {location:'index.html:error',message:'JavaScript error caught',data:{message:e.message,filename:e.filename,lineno:e.lineno,colno:e.colno,error:e.error?.toString()},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'};
-        console.error('[DEBUG] JavaScript Error:', logDataErr);
-        fetch('http://127.0.0.1:7244/ingest/6bfb1ca9-3ae3-4e08-97f6-3f15aea87cf6',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(logDataErr)}).catch(err=>console.error('[DEBUG] Log send failed:',err));
-      });
-      
-      // Track when page loads
-      window.addEventListener('load', function() {
-        const logDataLoad = {location:'index.html:load',message:'Window load event fired',data:{readyState:document.readyState,assetsLoaded:document.querySelectorAll('script,link[rel="stylesheet"]').length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'};
-        console.log('[DEBUG]', logDataLoad);
-        fetch('http://127.0.0.1:7244/ingest/6bfb1ca9-3ae3-4e08-97f6-3f15aea87cf6',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(logDataLoad)}).catch(err=>console.error('[DEBUG] Log send failed:',err));
-      });
-      
-      // Track DOM ready
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-          const logDataDOM = {location:'index.html:DOMContentLoaded',message:'DOM content loaded',data:{readyState:document.readyState},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'};
-          console.log('[DEBUG]', logDataDOM);
-          fetch('http://127.0.0.1:7244/ingest/6bfb1ca9-3ae3-4e08-97f6-3f15aea87cf6',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(logDataDOM)}).catch(err=>console.error('[DEBUG] Log send failed:',err));
-        });
-      } else {
-        const logDataReady = {location:'index.html:immediate',message:'DOM already ready',data:{readyState:document.readyState},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'};
-        console.log('[DEBUG]', logDataReady);
-        fetch('http://127.0.0.1:7244/ingest/6bfb1ca9-3ae3-4e08-97f6-3f15aea87cf6',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(logDataReady)}).catch(err=>console.error('[DEBUG] Log send failed:',err));
-      }
-      // #endregion
-    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

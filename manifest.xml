@@ -17,7 +17,7 @@
         <permission>product:read</permission>
     </permissions>
     <admin>
-        <module name="NaridonAIO" source="https://naridone-aio-git-test-shopware-ijas-muhammeds-projects.vercel.app" parent="sw-marketing">
+        <module name="NaridonAIO" source="https://naridone-aio-git-test-shopware-ijas-muhammeds-projects.vercel.app/" parent="sw-marketing">
              <label>Naridon AIO</label>
         </module>
     </admin>
