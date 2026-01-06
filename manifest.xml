@@ -10,13 +10,13 @@
         <license>MIT</license>
     </meta>
     <setup>
-        <registrationUrl>https://CHANGE_ME_TO_VERCEL_URL/api/register</registrationUrl>
+        <registrationUrl>https://naridone-aio-git-test-shopware-ijas-muhammeds-projects.vercel.app/app/api/register</registrationUrl>
         <secret>naridon_secret_123</secret>
     </setup>
     <permissions>
         <permission>product:read</permission>
     </permissions>
     <admin>
-        <admin-main-module source="https://CHANGE_ME_TO_VERCEL_URL/app" />
+        <admin-main-module source="https://naridone-aio-git-test-shopware-ijas-muhammeds-projects.vercel.app/app" />
     </admin>
 </manifest>
