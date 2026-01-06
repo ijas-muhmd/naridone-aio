@@ -12,6 +12,10 @@ import OptimizationSitemap from "./pages/optimization/OptimizationSitemap";
 import PricingPage from "./pages/Pricing";
 
 export default function App() {
+  // #region agent log
+  fetch('http://127.0.0.1:7244/ingest/6bfb1ca9-3ae3-4e08-97f6-3f15aea87cf6',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'App.tsx:15',message:'App component rendering',data:{path:window.location.pathname,search:window.location.search},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
+  // #endregion
+  
   return (
     <BrowserRouter>
       <Routes>
