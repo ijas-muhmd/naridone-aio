@@ -1,5 +1,4 @@
 import {
-  Page,
   Layout,
   Card,
   useIndexResourceState,
@@ -8,9 +7,7 @@ import {
   Toast,
   Box,
 } from "@shopify/polaris";
-import { TitleBar } from "../MockTitleBar";
 import React, { useState } from "react";
-import { OptimizationNav } from "../SubNavs";
 import { RedirectsTable } from "./redirects/RedirectsTable";
 import { CreateRedirectModal } from "./redirects/CreateRedirectModal";
 
@@ -52,19 +49,7 @@ export const OptimizationRedirects = ({
     useIndexResourceState(redirects);
 
   return (
-    <Page
-      title="Broken Links & Redirects"
-      subtitle="Manage 404s and URL redirects"
-      primaryAction={{
-        content: "Create Redirect",
-        onAction: () => setCreateModalOpen(true),
-      }}
-    >
-      <TitleBar title="Redirects" />
-      <Box padding="0">
-        <OptimizationNav />
-      </Box>
-
+    <>
       <Layout>
         <Layout.Section>
           <Card padding="0">
@@ -125,6 +110,6 @@ export const OptimizationRedirects = ({
       {toastContent && (
         <Toast content={toastContent} onDismiss={() => setToastContent(null)} />
       )}
-    </Page>
+    </>
   );
 };

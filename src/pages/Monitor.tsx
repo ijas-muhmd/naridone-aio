@@ -10,7 +10,7 @@ import {
   SkeletonDisplayText,
   Icon,
 } from "@shopify/polaris";
-import { TitleBar } from "@shopify/app-bridge-react";
+import { TitleBar } from "../components/MockTitleBar";
 import {
   SearchIcon,
   PersonIcon,

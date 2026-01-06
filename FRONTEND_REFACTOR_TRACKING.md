@@ -10,16 +10,17 @@ This document tracks the progress of refactoring the frontend codebase to separa
 
 ## Progress
 
-### 1. Main Dashboard (`app/routes/app._index.tsx`)
-- [x] **Refactor Page Controller**: `app._index.tsx` is now a clean controller.
+### 1. Main Dashboard (`src/pages/Dashboard.tsx`)
+- [x] **Refactor Page Controller**: `Dashboard.tsx` is the controller using `DashboardMain` component.
 - [x] **Extract Components**:
-    - [x] `DashboardCard.tsx` (Reusable card wrapper)
-    - [x] `CriticalActionCard.tsx` (Top alert section)
-    - [x] `MonitorZone.tsx` (Charts section)
-    - [x] `ImproveZone.tsx` (Stats section)
+    - [x] `DashboardMain.tsx` (Layout & composition)
+    - [x] `DashboardHeader.tsx` (Title & actions)
+    - [x] `AttentionRequiredCard.tsx` (Replaces CriticalActionCard)
+    - [x] `MonitorSection.tsx` (Replaces MonitorZone, contains `VisibilityChart`)
+    - [x] `ImproveSection.tsx` (Replaces ImproveZone)
     - [x] `ModelsModal.tsx` (Configuration modal)
-    - [x] `VisibilityChart.tsx`, `CustomTooltip.tsx`
-    - [x] `ImproveStats.tsx`, `IssueSeverityChart.tsx`, `IssueCategoryChart.tsx`
+    - [x] `ScoreGauge.tsx`, `VisibilityChart.tsx` (Charts)
+    - [x] `shared/DashboardCard.tsx` (Reusable wrapper)
 
 ### 2. Monitor Page (`app/routes/app.monitor.tsx`)
 - [x] **Refactor Page Controller**: Updated `MonitorDashboard` invocation to pass filters.
@@ -74,19 +75,29 @@ This document tracks the progress of refactoring the frontend codebase to separa
 
 ### 3. Optimization Page (`app/routes/app.optimization.tsx`)
 - [x] **Dashboard Tab (`OptimizationDashboard.tsx`)**
-    - [x] Extract Summary & Overview (`OptimizationSummary.tsx`, `FixesOverview.tsx`).
+    - [x] Extract Summary & Overview (`OptimizationSummary.tsx`, `IssueAnalysis.tsx`).
     - [x] Extract Charts (`FixPerformance.tsx`, `VisibilitySalesCorrelation.tsx`, `IssueTrendsAnalysis.tsx`).
     - [x] Extract Health Scorecard (`ProductHealthScorecard.tsx`).
     - [x] Refactor controller (`app.optimization.dashboard.tsx` -> `OptimizationDashboard.tsx`).
 - [x] **Fixes Tab (`OptimizationFixes.tsx`)**
-    - [x] Extract Table (`FixesTable.tsx`).
-    - [x] Extract Modals (`FixReviewModal.tsx`, `FixDetailsModal.tsx`).
+    - [x] Extract Table (`FixesTable.tsx`) - Updated headers and row actions (View & Apply, Undo).
+    - [x] Extract Modals (`FixReviewModal.tsx`, `FixDetailsModal.tsx`) - Refactored Review Modal UI.
     - [x] Extract Helpers (`utils.ts`).
     - [x] Refactor controller (`app.optimization.fixes.tsx` -> `OptimizationFixes.tsx`).
 - [x] **Redirects Tab (`OptimizationRedirects.tsx`)**
     - [x] Extract Table (`RedirectsTable.tsx`).
     - [x] Extract Modal (`CreateRedirectModal.tsx`).
     - [x] Refactor controller (`app.optimization.redirects.tsx` -> `OptimizationRedirects.tsx`).
+- [x] **Autopilot Tab (`OptimizationAutopilot.tsx`)**
+    - [x] Extract UI (`OptimizationAutopilot.tsx`).
+    - [x] Extract Sub-components (`AgentCard.tsx`, `SafetySettings.tsx`).
+    - [x] Create Page Controller (`src/pages/optimization/OptimizationAutopilot.tsx`).
 
-### 4. Shared Components
-- [ ] Review `app/components/` root for other large files that need breaking down.
+### 4. Pricing Page (`src/pages/Pricing.tsx`)
+- [x] Extract UI (`Pricing.tsx`).
+- [x] Extract Sub-components (`PricingPlanCard.tsx`, `ROICalculator.tsx`, `FAQSection.tsx`).
+
+### 5. Shared Components & Cleanup
+- [x] Remove unused components (`MonitorOverviewCards`, `MonitorAlertsStrip`, `MetricBarChart`, `MetricLineChart`, etc.).
+- [x] Remove unused dependencies (`@sentry`, `@shopify/app-bridge-react`).
+- [x] Standardize on `MockTitleBar`.

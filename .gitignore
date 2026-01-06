@@ -11,6 +11,10 @@ node_modules
 /prisma/dev.sqlite-journal
 database.sqlite
 
+
+.cursor
+/dist
+
 /temp
 
 .env

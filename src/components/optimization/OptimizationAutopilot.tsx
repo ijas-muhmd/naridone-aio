@@ -1,5 +1,4 @@
 import {
-  Page,
   Layout,
   Card,
   BlockStack,
@@ -24,8 +23,6 @@ import {
   ClockIcon,
 } from "@shopify/polaris-icons";
 import React, { useState, useCallback } from "react";
-import { TitleBar } from "../MockTitleBar";
-import { OptimizationNav } from "../SubNavs";
 
 // --- Styled Components (Converted to React Components) ---
 
@@ -149,13 +146,7 @@ export function OptimizationAutopilot({
   ];
 
   return (
-    <Page title="Improve" fullWidth={false} subtitle="Fix Engine">
-      {/* <TitleBar title="Optimize" /> */}
-      <Box padding="0">
-        <OptimizationNav />
-      </Box>
-
-      <Box paddingBlockStart="400">
+    <Box paddingBlockStart="400">
         <BlockStack gap="600">
           {/* Master Switch Section */}
           <Card>
@@ -284,6 +275,5 @@ export function OptimizationAutopilot({
           </Tabs>
         </BlockStack>
       </Box>
-    </Page>
   );
 }
