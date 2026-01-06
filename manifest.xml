@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/Framework/App/Manifest/Schema/manifest-2.0.xsd">
+    <meta>
+        <name>NaridonAIO</name>
+        <label>Naridon AIO</label>
+        <description>AI Optimization and Monitoring for your store.</description>
+        <author>Naridon</author>
+        <copyright>(c) Naridon</copyright>
+        <version>1.0.0</version>
+        <license>MIT</license>
+    </meta>
+    <setup>
+        <registrationUrl>https://CHANGE_ME_TO_VERCEL_URL/api/register</registrationUrl>
+        <secret>naridon_secret_123</secret>
+    </setup>
+    <permissions>
+        <permission>product:read</permission>
+    </permissions>
+    <admin>
+        <admin-main-module source="https://CHANGE_ME_TO_VERCEL_URL/app" />
+    </admin>
+</manifest>
