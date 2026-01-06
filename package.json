@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
+    "dev:proxy": "node vercel-proxy.js",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint ."
@@ -20,6 +21,7 @@
     "clsx": "^2.1.1",
     "colorthief": "^2.6.0",
     "date-fns": "^4.1.0",
+    "express": "^5.2.1",
     "gsap": "^3.13.0",
     "lucide-react": "^0.554.0",
     "posthog-js": "^1.298.1",

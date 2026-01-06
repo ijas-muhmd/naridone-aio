@@ -10,13 +10,15 @@
         <license>MIT</license>
     </meta>
     <setup>
-        <registrationUrl>https://naridone-aio-git-test-shopware-ijas-muhammeds-projects.vercel.app/app/api/register</registrationUrl>
+        <registrationUrl>http://192.168.29.237:3001/api/register</registrationUrl>
         <secret>naridon_secret_123</secret>
     </setup>
     <permissions>
         <permission>product:read</permission>
     </permissions>
     <admin>
-        <admin-main-module source="https://naridone-aio-git-test-shopware-ijas-muhammeds-projects.vercel.app/app" />
+        <module name="NaridonAIO" source="https://naridone-aio-git-test-shopware-ijas-muhammeds-projects.vercel.app" parent="sw-marketing">
+             <label>Naridon AIO</label>
+        </module>
     </admin>
 </manifest>
