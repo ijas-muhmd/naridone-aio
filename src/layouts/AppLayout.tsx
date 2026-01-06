@@ -7,6 +7,7 @@ import {
   SearchIcon,
   ArrowUpIcon,
   LinkIcon,
+  NoteIcon,
 } from "@shopify/polaris-icons";
 
 export default function AppLayout() {
@@ -47,6 +48,12 @@ export default function AppLayout() {
             icon: ArrowUpIcon,
             url: "/app/optimization",
             selected: location.pathname.startsWith("/app/optimization"),
+          },
+          {
+            label: "Pricing",
+            icon: NoteIcon,
+            url: "/app/pricing",
+            selected: location.pathname.startsWith("/app/pricing"),
           },
         ]}
       />

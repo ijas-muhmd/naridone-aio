@@ -5,8 +5,11 @@ import Monitor from "./pages/Monitor";
 import MonitorPromptDetail from "./pages/MonitorPromptDetail";
 import Optimization from "./pages/Optimization";
 import OptimizationDashboard from "./pages/optimization/OptimizationDashboard";
+import OptimizationAutopilot from "./pages/optimization/OptimizationAutopilot";
 import OptimizationFixes from "./pages/optimization/OptimizationFixes";
+import OptimizationRedirects from "./pages/optimization/OptimizationRedirects";
 import OptimizationSitemap from "./pages/optimization/OptimizationSitemap";
+import PricingPage from "./pages/Pricing";
 
 export default function App() {
   return (
@@ -21,9 +24,12 @@ export default function App() {
           </Route>
           <Route path="optimization" element={<Optimization />}>
             <Route index element={<OptimizationDashboard />} />
+            <Route path="automate" element={<OptimizationAutopilot />} />
             <Route path="fixes" element={<OptimizationFixes />} />
+            <Route path="redirects" element={<OptimizationRedirects />} />
             <Route path="sitemap" element={<OptimizationSitemap />} />
           </Route>
+          <Route path="pricing" element={<PricingPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

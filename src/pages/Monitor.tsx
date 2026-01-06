@@ -4,7 +4,6 @@ import {
   Layout,
   Card,
   Box,
-  Frame,
   BlockStack,
   SkeletonPage,
   SkeletonBodyText,
@@ -532,349 +531,346 @@ export default function MonitorPage() {
   );
 
   return (
-    <Frame>
-      <Page
-        fullWidth={false}
-        title="Monitor"
-        subtitle="Market Intelligence Hub"
-        primaryAction={
-          selectedTab === 1
+    <Page
+      fullWidth={false}
+      title="Monitor"
+      subtitle="Market Intelligence Hub"
+      primaryAction={
+        selectedTab === 1
+          ? {
+              content: "Add Prompt",
+              icon: PlusIcon,
+              onAction: () => {
+                setEditingPrompt(null);
+                setPromptModalOpen(true);
+              },
+            }
+          : selectedTab === 2
             ? {
-                content: "Add Prompt",
-                icon: PlusIcon,
-                onAction: () => {
-                  setEditingPrompt(null);
-                  setPromptModalOpen(true);
-                },
+                content: "Add Competitor",
+                onAction: () => setCompetitorModalOpen(true),
               }
-            : selectedTab === 2
-              ? {
-                  content: "Add Competitor",
-                  onAction: () => setCompetitorModalOpen(true),
-                }
-              : undefined
-        }
-      >
-        <TitleBar title="Monitor" />
+            : undefined
+      }
+    >
+      <TitleBar title="Monitor" />
 
-        <Layout>
-          <Layout.Section>
-            <Box padding="0">
-              <div
-                style={{
-                  display: "flex",
-                  width: "100%",
-                  backgroundColor: "white",
-                  borderRadius: "12px",
-                  padding: "4px",
-                  boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
-                  gap: "4px",
-                  marginBottom: "24px",
-                  overflowX: "auto",
-                }}
-              >
-                {tabs.map((tab, index) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => handleTabClick(index)}
+      <Layout>
+        <Layout.Section>
+          <Box padding="0">
+            <div
+              style={{
+                display: "flex",
+                width: "100%",
+                backgroundColor: "white",
+                borderRadius: "12px",
+                padding: "4px",
+                boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
+                gap: "4px",
+                marginBottom: "24px",
+                overflowX: "auto",
+              }}
+            >
+              {tabs.map((tab, index) => (
+                <button
+                  key={tab.id}
+                  onClick={() => handleTabClick(index)}
+                  style={{
+                    flex: tab.id === "dashboard" ? "0 0 auto" : 1,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: "8px 16px",
+                    borderRadius: "8px",
+                    border: "none",
+                    backgroundColor:
+                      selectedTab === index ? "#f3f4f6" : "transparent",
+                    color: selectedTab === index ? "#1f2937" : "#6b7280",
+                    fontSize: "14px",
+                    fontWeight: selectedTab === index ? 500 : 400,
+                    cursor: "pointer",
+                    transition: "all 0.2s ease",
+                    fontFamily:
+                      '-apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+                    outline: "none",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  <div
                     style={{
-                      flex: tab.id === "dashboard" ? "0 0 auto" : 1,
                       display: "flex",
-                      justifyContent: "center",
                       alignItems: "center",
-                      padding: "8px 16px",
-                      borderRadius: "8px",
-                      border: "none",
-                      backgroundColor:
-                        selectedTab === index ? "#f3f4f6" : "transparent",
-                      color: selectedTab === index ? "#1f2937" : "#6b7280",
-                      fontSize: "14px",
-                      fontWeight: selectedTab === index ? 500 : 400,
-                      cursor: "pointer",
-                      transition: "all 0.2s ease",
-                      fontFamily:
-                        '-apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-                      outline: "none",
-                      whiteSpace: "nowrap",
+                      gap: "6px",
                     }}
                   >
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "6px",
-                      }}
-                    >
-                      {tab.icon && (
-                        <span
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            fontSize: "16px",
-                            lineHeight: 1,
-                          }}
-                        >
-                          <Icon source={tab.icon} />
-                        </span>
-                      )}
-                      {tab.id !== "dashboard" && <span>{tab.content}</span>}
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </Box>
+                    {tab.icon && (
+                      <span
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          fontSize: "16px",
+                          lineHeight: 1,
+                        }}
+                      >
+                        <Icon source={tab.icon} />
+                      </span>
+                    )}
+                    {tab.id !== "dashboard" && <span>{tab.content}</span>}
+                  </div>
+                </button>
+              ))}
+            </div>
+          </Box>
 
-            <Box padding="0" paddingBlockEnd="400">
-              {loading || !data ? (
-                selectedTab === 0 ? (
-                  <DashboardSkeleton />
-                ) : (
-                  <TabSkeleton />
-                )
+          <Box padding="0" paddingBlockEnd="400">
+            {loading || !data ? (
+              selectedTab === 0 ? (
+                <DashboardSkeleton />
               ) : (
-                <>
-                  {selectedTab === 0 && (
-                    <Suspense fallback={<DashboardSkeleton />}>
-                      <MonitorDashboard
-                        data={data.dashboard}
-                        stats={data.stats}
-                        navigate={navigate}
-                        products={[]}
-                        chartData={data.chartData}
-                        dashboardCharts={data.dashboardCharts}
-                        brandName={data.stats.brandName || "You"}
-                        deepDiveStats={data.deepDiveStats}
-                        competitorInsights={data.competitorInsights}
-                        sourcesChartData={[]}
-                        topics={data.existingTopics.map((t: string) => ({
-                          label: t,
-                          value: t,
-                        }))}
-                        topicRankings={data.topicRankings}
-                        citationsData={data.citations}
-                        onNavigateToCompetitors={() => handleTabClick(2)}
-                        filters={currentFilters}
-                        onFilterChange={handleFilterChange}
-                      />
-                    </Suspense>
-                  )}
-                  {selectedTab === 1 && (
-                    <Suspense fallback={<TabSkeleton />}>
-                      <MonitorTracking
-                        prompts={data.tracking.prompts}
-                        navigate={navigate}
-                        planLimits={{ prompts: 100 }}
-                        sentimentTrend={data.sentimentTrendData}
-                        locationStats={data.locationStats}
-                        watchlistSummary={data.watchlistSummary}
-                        onAddPrompt={() => {}}
-                        onEditPrompt={(prompt) => {
-                          setEditingPrompt(prompt);
-                          setPromptModalOpen(true);
-                        }}
-                      />
-                    </Suspense>
-                  )}
-                  {selectedTab === 2 && (
-                    <Suspense fallback={<TabSkeleton />}>
-                      <MonitorCompetitors
-                        competitors={data.competitors.list}
-                        suggestedBrands={data.competitors.suggested}
-                        onTrackCompetitor={() => {}}
-                        onSelectCompetitor={() => {}}
-                      />
-                    </Suspense>
-                  )}
-                  {selectedTab === 3 && (
-                    <Suspense fallback={<TabSkeleton />}>
-                      <MonitorCitation
-                        topics={data.existingTopics.map((t: string) => ({
-                          label: t,
-                          value: t,
-                        }))}
-                        data={data.citations}
-                        brandName="You"
-                      />
-                    </Suspense>
-                  )}
-                  {selectedTab === 4 && (
-                    <Suspense fallback={<TabSkeleton />}>
-                      <MonitorMentions
-                        mentions={data.externalMentions}
-                        trendData={data.mentionsTrend}
-                        topics={data.existingTopics.map((t: string) => ({
-                          label: t,
-                          value: t,
-                        }))}
-                        pagination={data.mentionsPagination}
-                      />
-                    </Suspense>
-                  )}
-                  {selectedTab === 5 && (
-                    <Suspense fallback={<TabSkeleton />}>
-                      <MonitorSentiment
-                        topics={data.existingTopics.map((t: string) => ({
-                          label: t,
-                          value: t,
-                        }))}
-                        data={data.sentiment}
-                        brandName="You"
-                        filters={{
-                          timeRange: currentFilters.timeRange,
-                          topics: [],
-                          platforms: [],
-                          citations: [],
-                          prompts: [],
-                          location: [],
-                        }}
-                        onFilterChange={handleFilterChange}
-                      />
-                    </Suspense>
-                  )}
-                  {selectedTab === 6 && (
-                    <Suspense fallback={<TabSkeleton />}>
-                      <MonitorPlatforms
-                        topics={data.existingTopics.map((t: string) => ({
-                          label: t,
-                          value: t,
-                        }))}
-                        data={data.platforms.metrics}
-                        matrixData={data.platforms.matrix}
-                        brandName="You"
-                        brandDomain="you.com"
-                        filters={{
-                          timeRange: currentFilters.timeRange,
-                          topics: [],
-                          platforms: [],
-                          citations: [],
-                          prompts: [],
-                          location: [],
-                        }}
-                        onFilterChange={handleFilterChange}
-                      />
-                    </Suspense>
-                  )}
-                  {selectedTab === 7 && (
-                    <Suspense fallback={<TabSkeleton />}>
-                      <MonitorPersonas
-                        personas={data.personas}
-                        data={{}}
-                        topics={data.existingTopics.map((t: string) => ({
-                          label: t,
-                          value: t,
-                        }))}
-                      />
-                    </Suspense>
-                  )}
-                </>
-              )}
-            </Box>
-          </Layout.Section>
-        </Layout>
-        <AddCompetitorModal
-          open={competitorModalOpen}
-          onClose={() => setCompetitorModalOpen(false)}
-          onAdd={(name) => {
-            console.log("Adding competitor:", name);
+                <TabSkeleton />
+              )
+            ) : (
+              <>
+                {selectedTab === 0 && (
+                  <Suspense fallback={<DashboardSkeleton />}>
+                    <MonitorDashboard
+                      data={data.dashboard}
+                      stats={data.stats}
+                      navigate={navigate}
+                      products={[]}
+                      chartData={data.chartData}
+                      dashboardCharts={data.dashboardCharts}
+                      brandName={data.stats.brandName || "You"}
+                      deepDiveStats={data.deepDiveStats}
+                      competitorInsights={data.competitorInsights}
+                      sourcesChartData={[]}
+                      topics={data.existingTopics.map((t: string) => ({
+                        label: t,
+                        value: t,
+                      }))}
+                      topicRankings={data.topicRankings}
+                      citationsData={data.citations}
+                      onNavigateToCompetitors={() => handleTabClick(2)}
+                      filters={currentFilters}
+                      onFilterChange={handleFilterChange}
+                    />
+                  </Suspense>
+                )}
+                {selectedTab === 1 && (
+                  <Suspense fallback={<TabSkeleton />}>
+                    <MonitorTracking
+                      prompts={data.tracking.prompts}
+                      navigate={navigate}
+                      planLimits={{ prompts: 100 }}
+                      sentimentTrend={data.sentimentTrendData}
+                      locationStats={data.locationStats}
+                      watchlistSummary={data.watchlistSummary}
+                      onAddPrompt={() => {}}
+                      onEditPrompt={(prompt) => {
+                        setEditingPrompt(prompt);
+                        setPromptModalOpen(true);
+                      }}
+                    />
+                  </Suspense>
+                )}
+                {selectedTab === 2 && (
+                  <Suspense fallback={<TabSkeleton />}>
+                    <MonitorCompetitors
+                      competitors={data.competitors.list}
+                      suggestedBrands={data.competitors.suggested}
+                      onTrackCompetitor={() => {}}
+                      onSelectCompetitor={() => {}}
+                    />
+                  </Suspense>
+                )}
+                {selectedTab === 3 && (
+                  <Suspense fallback={<TabSkeleton />}>
+                    <MonitorCitation
+                      topics={data.existingTopics.map((t: string) => ({
+                        label: t,
+                        value: t,
+                      }))}
+                      data={data.citations}
+                      brandName="You"
+                    />
+                  </Suspense>
+                )}
+                {selectedTab === 4 && (
+                  <Suspense fallback={<TabSkeleton />}>
+                    <MonitorMentions
+                      mentions={data.externalMentions}
+                      trendData={data.mentionsTrend}
+                      topics={data.existingTopics.map((t: string) => ({
+                        label: t,
+                        value: t,
+                      }))}
+                      pagination={data.mentionsPagination}
+                    />
+                  </Suspense>
+                )}
+                {selectedTab === 5 && (
+                  <Suspense fallback={<TabSkeleton />}>
+                    <MonitorSentiment
+                      topics={data.existingTopics.map((t: string) => ({
+                        label: t,
+                        value: t,
+                      }))}
+                      data={data.sentiment}
+                      brandName="You"
+                      filters={{
+                        timeRange: currentFilters.timeRange,
+                        topics: [],
+                        platforms: [],
+                        citations: [],
+                        prompts: [],
+                        location: [],
+                      }}
+                      onFilterChange={handleFilterChange}
+                    />
+                  </Suspense>
+                )}
+                {selectedTab === 6 && (
+                  <Suspense fallback={<TabSkeleton />}>
+                    <MonitorPlatforms
+                      topics={data.existingTopics.map((t: string) => ({
+                        label: t,
+                        value: t,
+                      }))}
+                      data={data.platforms.metrics}
+                      matrixData={data.platforms.matrix}
+                      brandName="You"
+                      brandDomain="you.com"
+                      filters={{
+                        timeRange: currentFilters.timeRange,
+                        topics: [],
+                        platforms: [],
+                        citations: [],
+                        prompts: [],
+                        location: [],
+                      }}
+                      onFilterChange={handleFilterChange}
+                    />
+                  </Suspense>
+                )}
+                {selectedTab === 7 && (
+                  <Suspense fallback={<TabSkeleton />}>
+                    <MonitorPersonas
+                      personas={data.personas}
+                      data={{}}
+                      topics={data.existingTopics.map((t: string) => ({
+                        label: t,
+                        value: t,
+                      }))}
+                    />
+                  </Suspense>
+                )}
+              </>
+            )}
+          </Box>
+        </Layout.Section>
+      </Layout>
+      <AddCompetitorModal
+        open={competitorModalOpen}
+        onClose={() => setCompetitorModalOpen(false)}
+        onAdd={(name) => {
+          console.log("Adding competitor:", name);
+          setData((prev: any) => ({
+            ...prev,
+            competitors: {
+              ...prev.competitors,
+              list: [
+                ...prev.competitors.list,
+                { id: Date.now(), name, overlap: "Unknown" },
+              ],
+            },
+          }));
+          setCompetitorModalOpen(false);
+        }}
+      />
+      <AddPromptModal
+        open={promptModalOpen}
+        onClose={() => {
+          setPromptModalOpen(false);
+          setEditingPrompt(null);
+        }}
+        promptToEdit={editingPrompt}
+        existingTopics={[
+          "Brand Awareness",
+          "Product Features",
+          "Sustainability",
+          "Performance",
+          "Durability",
+          "Comfort",
+          "Style",
+          "Price",
+          "Innovation",
+          "Customer Service",
+        ]}
+        personas={[
+          { id: "p1", name: "Budget Shopper" },
+          { id: "p2", name: "Eco-Conscious" },
+          { id: "p3", name: "Performance Athlete" },
+          { id: "p4", name: "Fashion Forward" },
+          { id: "p5", name: "Casual Walker" },
+        ]}
+        products={[
+          {
+            id: "prod1",
+            title: "Eco-Friendly Sneakers",
+            image:
+              "https://cdn.shopify.com/s/files/1/0262/4071/2726/products/sneaker.png",
+          },
+          { id: "prod2", title: "Performance Running Shoes" },
+          { id: "prod3", title: "Trail Blaza Hiking Boots" },
+          { id: "prod4", title: "Urban Glide Loafers" },
+          { id: "prod5", title: "Marathon Elite Racers" },
+          { id: "prod6", title: "Kids Velcro Sneakers" },
+          { id: "prod7", title: "Winter Insulated Boots" },
+          { id: "prod8", title: "Summer Canvas Slip-ons" },
+          { id: "prod9", title: "Orthopedic Walking Shoes" },
+          { id: "prod10", title: "Limited Edition High-Tops" },
+        ]}
+        onAdd={(prompt) => {
+          console.log("Adding/Editing prompt:", prompt);
+          if (prompt.mode === "edit") {
             setData((prev: any) => ({
               ...prev,
-              competitors: {
-                ...prev.competitors,
-                list: [
-                  ...prev.competitors.list,
-                  { id: Date.now(), name, overlap: "Unknown" },
+              tracking: {
+                ...prev.tracking,
+                prompts: prev.tracking.prompts.map((p: any) =>
+                  p.id === prompt.id
+                    ? {
+                        ...p,
+                        text: prompt.text,
+                        topic: prompt.topic,
+                      }
+                    : p,
+                ),
+              },
+            }));
+          } else {
+            setData((prev: any) => ({
+              ...prev,
+              tracking: {
+                ...prev.tracking,
+                prompts: [
+                  ...prev.tracking.prompts,
+                  {
+                    id: Date.now().toString(),
+                    text: prompt.text || (prompt.prompts && prompt.prompts[0]),
+                    frequency: "Daily",
+                    status: "ACTIVE",
+                    topic: prompt.topic || "General",
+                    runs: [],
+                  },
                 ],
               },
             }));
-            setCompetitorModalOpen(false);
-          }}
-        />
-        <AddPromptModal
-          open={promptModalOpen}
-          onClose={() => {
-            setPromptModalOpen(false);
-            setEditingPrompt(null);
-          }}
-          promptToEdit={editingPrompt}
-          existingTopics={[
-            "Brand Awareness",
-            "Product Features",
-            "Sustainability",
-            "Performance",
-            "Durability",
-            "Comfort",
-            "Style",
-            "Price",
-            "Innovation",
-            "Customer Service",
-          ]}
-          personas={[
-            { id: "p1", name: "Budget Shopper" },
-            { id: "p2", name: "Eco-Conscious" },
-            { id: "p3", name: "Performance Athlete" },
-            { id: "p4", name: "Fashion Forward" },
-            { id: "p5", name: "Casual Walker" },
-          ]}
-          products={[
-            {
-              id: "prod1",
-              title: "Eco-Friendly Sneakers",
-              image:
-                "https://cdn.shopify.com/s/files/1/0262/4071/2726/products/sneaker.png",
-            },
-            { id: "prod2", title: "Performance Running Shoes" },
-            { id: "prod3", title: "Trail Blaza Hiking Boots" },
-            { id: "prod4", title: "Urban Glide Loafers" },
-            { id: "prod5", title: "Marathon Elite Racers" },
-            { id: "prod6", title: "Kids Velcro Sneakers" },
-            { id: "prod7", title: "Winter Insulated Boots" },
-            { id: "prod8", title: "Summer Canvas Slip-ons" },
-            { id: "prod9", title: "Orthopedic Walking Shoes" },
-            { id: "prod10", title: "Limited Edition High-Tops" },
-          ]}
-          onAdd={(prompt) => {
-            console.log("Adding/Editing prompt:", prompt);
-            if (prompt.mode === "edit") {
-              setData((prev: any) => ({
-                ...prev,
-                tracking: {
-                  ...prev.tracking,
-                  prompts: prev.tracking.prompts.map((p: any) =>
-                    p.id === prompt.id
-                      ? {
-                          ...p,
-                          text: prompt.text,
-                          topic: prompt.topic,
-                        }
-                      : p,
-                  ),
-                },
-              }));
-            } else {
-              setData((prev: any) => ({
-                ...prev,
-                tracking: {
-                  ...prev.tracking,
-                  prompts: [
-                    ...prev.tracking.prompts,
-                    {
-                      id: Date.now().toString(),
-                      text:
-                        prompt.text || (prompt.prompts && prompt.prompts[0]),
-                      frequency: "Daily",
-                      status: "ACTIVE",
-                      topic: prompt.topic || "General",
-                      runs: [],
-                    },
-                  ],
-                },
-              }));
-            }
-            setPromptModalOpen(false);
-            setEditingPrompt(null);
-          }}
-        />
-      </Page>
-    </Frame>
+          }
+          setPromptModalOpen(false);
+          setEditingPrompt(null);
+        }}
+      />
+    </Page>
   );
 }

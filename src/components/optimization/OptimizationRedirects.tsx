@@ -6,7 +6,6 @@ import {
   EmptyState,
   Pagination,
   Toast,
-  Frame,
   Box,
 } from "@shopify/polaris";
 import { TitleBar } from "../MockTitleBar";
@@ -53,84 +52,79 @@ export const OptimizationRedirects = ({
     useIndexResourceState(redirects);
 
   return (
-    <Frame>
-      <Page
-        title="Broken Links & Redirects"
-        subtitle="Manage 404s and URL redirects"
-        primaryAction={{
-          content: "Create Redirect",
-          onAction: () => setCreateModalOpen(true),
-        }}
-      >
-        <TitleBar title="Redirects" />
-        <Box padding="0">
-          <OptimizationNav />
-        </Box>
+    <Page
+      title="Broken Links & Redirects"
+      subtitle="Manage 404s and URL redirects"
+      primaryAction={{
+        content: "Create Redirect",
+        onAction: () => setCreateModalOpen(true),
+      }}
+    >
+      <TitleBar title="Redirects" />
+      <Box padding="0">
+        <OptimizationNav />
+      </Box>
 
-        <Layout>
-          <Layout.Section>
-            <Card padding="0">
-              {redirects.length === 0 && !loading ? (
-                <EmptyState
-                  heading="No redirects found"
-                  action={{
-                    content: "Create Redirect",
-                    onAction: () => setCreateModalOpen(true),
-                  }}
-                  image="https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png"
-                >
-                  <p>Create redirects to fix broken links and improve SEO.</p>
-                </EmptyState>
-              ) : (
-                <RedirectsTable
-                  redirects={redirects}
-                  loading={loading}
-                  handleDelete={handleDelete}
-                  selectedResources={selectedResources}
-                  allResourcesSelected={allResourcesSelected}
-                  handleSelectionChange={handleSelectionChange}
+      <Layout>
+        <Layout.Section>
+          <Card padding="0">
+            {redirects.length === 0 && !loading ? (
+              <EmptyState
+                heading="No redirects found"
+                action={{
+                  content: "Create Redirect",
+                  onAction: () => setCreateModalOpen(true),
+                }}
+                image="https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png"
+              >
+                <p>Create redirects to fix broken links and improve SEO.</p>
+              </EmptyState>
+            ) : (
+              <RedirectsTable
+                redirects={redirects}
+                loading={loading}
+                handleDelete={handleDelete}
+                selectedResources={selectedResources}
+                allResourcesSelected={allResourcesSelected}
+                handleSelectionChange={handleSelectionChange}
+              />
+            )}
+
+            {pageInfo?.hasNextPage && (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  padding: "16px",
+                }}
+              >
+                <Pagination
+                  hasPrevious={!!cursor}
+                  onPrevious={() => loadRedirects()} // Simplification: Reset to start
+                  hasNext={pageInfo.hasNextPage}
+                  onNext={() =>
+                    loadRedirects(redirects[redirects.length - 1].cursor)
+                  }
                 />
-              )}
+              </div>
+            )}
+          </Card>
+        </Layout.Section>
+      </Layout>
 
-              {pageInfo?.hasNextPage && (
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    padding: "16px",
-                  }}
-                >
-                  <Pagination
-                    hasPrevious={!!cursor}
-                    onPrevious={() => loadRedirects()} // Simplification: Reset to start
-                    hasNext={pageInfo.hasNextPage}
-                    onNext={() =>
-                      loadRedirects(redirects[redirects.length - 1].cursor)
-                    }
-                  />
-                </div>
-              )}
-            </Card>
-          </Layout.Section>
-        </Layout>
+      <CreateRedirectModal
+        open={createModalOpen}
+        onClose={() => setCreateModalOpen(false)}
+        onCreate={onCreate}
+        path={path}
+        setPath={setPath}
+        target={target}
+        setTarget={setTarget}
+      />
 
-        <CreateRedirectModal
-          open={createModalOpen}
-          onClose={() => setCreateModalOpen(false)}
-          onCreate={onCreate}
-          path={path}
-          setPath={setPath}
-          target={target}
-          setTarget={setTarget}
-        />
-
-        {toastContent && (
-          <Toast
-            content={toastContent}
-            onDismiss={() => setToastContent(null)}
-          />
-        )}
-      </Page>
-    </Frame>
+      {toastContent && (
+        <Toast content={toastContent} onDismiss={() => setToastContent(null)} />
+      )}
+    </Page>
   );
 };
