@@ -1,0 +1,254 @@
+openapi: 3.0.3
+info:
+  title: Naridon API
+  description: >
+    Internal API for the Naridon Shopify App.
+    Handles AI monitoring, optimization, and background job processing.
+  version: 1.0.0
+servers:
+  - url: https://app.naridon.com
+    description: Production Server
+  - url: http://localhost:3000
+    description: Local Development
+
+components:
+  securitySchemes:
+    SessionAuth:
+      type: apiKey
+      in: cookie
+      name: shopify_session
+      description: Standard Shopify App Bridge authentication.
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Used for Cron jobs (CRON_SECRET) and QStash (Signature).
+
+  schemas:
+    Stats:
+      type: object
+      properties:
+        visibilityScore:
+          type: number
+        brandDefenseScore:
+          type: number
+        totalPrompts:
+          type: integer
+    
+    Prompt:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        text:
+          type: string
+        status:
+          type: string
+          enum: [ACTIVE, INACTIVE, SUGGESTED]
+        lastRunStatus:
+          type: string
+    
+    Fix:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        status:
+          type: string
+        priority:
+          type: string
+        suggestedValue:
+          type: string
+
+paths:
+  # --- MONITORING ENDPOINTS ---
+  /api/monitor/dashboard:
+    get:
+      summary: Get Monitor Dashboard Overview
+      description: Returns headline stats, latest run, and signals for Tab 0.
+      security:
+        - SessionAuth: []
+      parameters:
+        - name: timeRange
+          in: query
+          schema:
+            type: integer
+            default: 30
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dashboard:
+                    type: object
+                    properties:
+                      latestRun:
+                        type: object
+                      signals:
+                        type: array
+
+  /api/monitor/tracking:
+    get:
+      summary: Get Tracked Prompts
+      description: Returns list of prompts with latest run data for Tab 1.
+      security:
+        - SessionAuth: []
+      responses:
+        '200':
+          description: List of prompts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tracking:
+                    type: object
+                    properties:
+                      prompts:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Prompt'
+
+  /api/monitor/competitors:
+    get:
+      summary: Get Competitor Analysis
+      description: Returns competitor stats and suggested brands for Tab 2.
+      security:
+        - SessionAuth: []
+
+  /api/monitor/citations:
+    get:
+      summary: Get Citation Analysis
+      description: Returns source breakdown, trends, and graph data for Tab 3.
+      security:
+        - SessionAuth: []
+
+  /api/monitor/mentions:
+    get:
+      summary: Get External Mentions
+      description: Returns external mentions (Reddit, News) for Tab 4.
+      security:
+        - SessionAuth: []
+
+  /api/monitor/sentiment:
+    get:
+      summary: Get Sentiment Analysis
+      description: Returns detailed sentiment breakdown for Tab 5.
+      security:
+        - SessionAuth: []
+
+  /api/monitor/platforms:
+    get:
+      summary: Get Platform Metrics
+      description: Returns metrics per search engine (Google vs Bing) for Tab 6.
+      security:
+        - SessionAuth: []
+
+  # --- OPTIMIZATION ENDPOINTS ---
+  /api/optimization/stats:
+    get:
+      summary: Get Optimization Headlines
+      description: Fast loading stats for the top of the Improve page.
+      security:
+        - SessionAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  stats:
+                    $ref: '#/components/schemas/Stats'
+
+  /api/optimization/trends:
+    get:
+      summary: Get Optimization Trends & Charts
+      description: Heavy visualization data (charts, heatmaps) for Improve page.
+      security:
+        - SessionAuth: []
+
+  /api/optimization/fixes:
+    get:
+      summary: Get Fix Suggestions
+      description: Returns paginated list of SEO fixes.
+      security:
+        - SessionAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  fixes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Fix'
+                  pagination:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+
+  # --- BACKGROUND JOBS ---
+  /api/queue/process-prompt:
+    post:
+      summary: Worker - Process Prompt Analysis
+      description: >
+        Triggered by QStash. Runs the AI analysis for a single prompt.
+        Requires Upstash signature verification.
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - promptId
+                - shopId
+              properties:
+                promptId:
+                  type: string
+                shopId:
+                  type: string
+                sessionId:
+                  type: string
+      responses:
+        '200':
+          description: Job succeeded
+        '500':
+          description: Job failed (triggers retry)
+
+  /api/cron/monitor:
+    get:
+      summary: Cron - Schedule Monitoring
+      description: Triggered by Vercel Cron (Daily). Queues prompts to QStash.
+      security:
+        - BearerAuth: []
+
+  /api/cron/optimize:
+    get:
+      summary: Cron - Auto Optimize
+      description: Triggered by Vercel Cron. Generates or applies fixes.
+      security:
+        - BearerAuth: []
+
