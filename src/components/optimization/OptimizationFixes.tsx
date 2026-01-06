@@ -222,20 +222,7 @@ export const OptimizationFixes = ({
   };
 
   return (
-    <Page
-      fullWidth={false}
-      title="Improve"
-      subtitle="Fix Queue"
-      primaryAction={{
-        content: "Scan Store",
-        onAction: onScan,
-        loading: isLoading && !loadingId,
-      }}
-    >
-      <Box padding="0">
-        <OptimizationNav />
-      </Box>
-
+    <>
       <Box paddingBlockStart="400">
         <BlockStack gap="400">
           <FixFilters
@@ -353,6 +340,6 @@ export const OptimizationFixes = ({
       {toastContent && (
         <Toast content={toastContent} onDismiss={onToastDismiss} />
       )}
-    </Page>
+    </>
   );
 };

@@ -1,5 +1,4 @@
 import {
-  Page,
   Layout,
   Button,
   BlockStack,
@@ -19,13 +18,11 @@ import {
   Grid,
   Card,
 } from "@shopify/polaris";
-import { TitleBar } from "../MockTitleBar";
 import { UploadIcon, PlusIcon, NoteIcon } from "@shopify/polaris-icons";
 import { useNavigate } from "react-router-dom";
 import { useState, useCallback, useEffect, useMemo } from "react";
 import { DataFilters, type FilterOptions } from "../DataFilters";
 import { AVAILABLE_MODELS } from "../../utils/platforms";
-import { OptimizationNav } from "../SubNavs";
 import { OptimizationSummary } from "./dashboard/OptimizationSummary";
 import { IssueAnalysis } from "./dashboard/IssueAnalysis";
 import { FixPerformance } from "./dashboard/FixPerformance";
@@ -233,9 +230,7 @@ export function OptimizationDashboard({
   }
 
   return (
-    <Page title="Optimization" fullWidth={false}>
-      <TitleBar title="Optimization" />
-
+    <>
       {fetchedNeedsScopeUpdate && (
         <Layout.Section>
           <Banner
@@ -255,8 +250,6 @@ export function OptimizationDashboard({
       )}
 
       <BlockStack gap="500">
-        <OptimizationNav />
-
         <DataFilters
           filters={filters}
           onChange={onFilterChange}
@@ -423,6 +416,6 @@ export function OptimizationDashboard({
           </BlockStack>
         </Modal.Section>
       </Modal>
-    </Page>
+    </>
   );
 }
