@@ -12,6 +12,7 @@ node_modules
 database.sqlite
 
 
+.cursor
 /dist
 
 /temp
