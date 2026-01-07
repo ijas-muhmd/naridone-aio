@@ -1,5 +1,5 @@
 import { Layout, Text } from "@shopify/polaris";
-import { VisibilityRankingsCard } from "../VisibilityRankingsCard";
+import { VisibilityRankingsCard } from "./VisibilityRankingsCard";
 import React from "react";
 
 interface TopicAuthorityCardProps {

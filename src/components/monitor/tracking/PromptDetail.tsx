@@ -30,11 +30,11 @@ import {
   MultiSelectFilters,
   MultiSelectFilterOptions,
 } from "../../MultiSelectFilters";
-import { MonitorExecutionsTable } from "../MonitorExecutionsTable";
-import { MonitorCitationsTable } from "../MonitorCitationsTable";
-import { VisibilityTab } from "../VisibilityTab";
-import { AveragePositionTab } from "../AveragePositionTab";
-import { CitationShareTab } from "../CitationShareTab";
+import { MonitorExecutionsTable } from "./MonitorExecutionsTable";
+import { MonitorCitationsTable } from "./MonitorCitationsTable";
+import { VisibilityTab } from "./VisibilityTab";
+import { AveragePositionTab } from "./AveragePositionTab";
+import { CitationShareTab } from "./CitationShareTab";
 
 // Constants from reference
 const DEFAULT_PLATFORMS = [

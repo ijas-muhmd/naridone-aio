@@ -7,7 +7,7 @@ import {
 } from "@shopify/polaris";
 import { ArrowLeftIcon, ArrowRightIcon } from "@shopify/polaris-icons";
 import React from "react";
-import { SimpleMarkdownRenderer } from "../SimpleMarkdownRenderer";
+import { SimpleMarkdownRenderer } from "../shared/SimpleMarkdownRenderer";
 import { getThemeDetails, getPlatformIconUrl } from "./utils";
 
 interface ThemeDetailRowProps {

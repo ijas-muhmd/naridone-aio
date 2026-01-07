@@ -5,7 +5,7 @@ import {
   ChevronDownIcon,
 } from "@shopify/polaris-icons";
 import React from "react";
-import { ExpandedModalTable } from "../ExpandedModalTable";
+import { ExpandedModalTable } from "./ExpandedModalTable";
 import { DomainIcon } from "./DomainIcon";
 import { CategoryBadge } from "./CategoryBadge";
 import { MentionedStatus } from "./MentionedStatus";

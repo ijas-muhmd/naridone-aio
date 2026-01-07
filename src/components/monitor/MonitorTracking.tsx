@@ -15,7 +15,7 @@ import {
   ViewIcon,
 } from "@shopify/polaris-icons";
 import { useState, useMemo, useCallback, useEffect, useRef } from "react";
-import { ViewConfigButton } from "./ViewConfigButton";
+import { ViewConfigButton } from "./shared/ViewConfigButton";
 import { TrackingSummaryCards } from "./tracking/TrackingSummaryCards";
 import { PromptIndexTable } from "./tracking/PromptIndexTable";
 import { PromptGroup } from "./tracking/PromptGroup";

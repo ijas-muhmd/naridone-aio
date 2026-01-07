@@ -14,7 +14,7 @@ import {
 } from "recharts";
 import { ClientOnly } from "../../ClientOnly";
 import { getPlatformInfo, PLATFORMS } from "../../../utils/platforms";
-import { ViewConfigButton } from "../ViewConfigButton";
+import { ViewConfigButton } from "../shared/ViewConfigButton";
 import { useMemo, useState } from "react";
 
 interface PlatformMetricCardProps {

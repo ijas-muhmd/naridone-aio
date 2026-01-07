@@ -1,4 +1,4 @@
-import { Card, BlockStack, Text, Box, Link, InlineStack, Button, Checkbox } from "@shopify/polaris";
+﻿import { Card, BlockStack, Text, Box, Link, InlineStack, Button, Checkbox } from "@shopify/polaris";
 import { CheckIcon, UndoIcon } from "@shopify/polaris-icons";
 
 interface DiffCardProps {
@@ -128,7 +128,7 @@ export function DiffCard({ shop, fix, selected = false, onSelect, onApply, onUnd
                 <InlineStack align="space-between" blockAlign="center">
                     {fix.productHandle && shop && (
                         <Link url={`https://${shop}/products/${fix.productHandle}`} target="_blank">
-                            View Product on Store →
+                            View Product on Store â†’
                         </Link>
                     )}
                     <InlineStack gap="200">

@@ -1,7 +1,7 @@
 import { Grid } from "@shopify/polaris";
-import { MetricLineChart } from "./MetricLineChart";
-import { MetricBarChart } from "./MetricBarChart";
-import { getPlatformInfo } from "../../utils/platforms";
+import { MetricLineChart } from "./charts/MetricLineChart";
+import { MetricBarChart } from "./charts/MetricBarChart";
+import { getPlatformInfo } from "../../../utils/platforms";
 
 interface Run {
     id: string;

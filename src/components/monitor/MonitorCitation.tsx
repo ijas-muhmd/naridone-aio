@@ -8,8 +8,8 @@ import {
 } from "@shopify/polaris";
 import { InfoIcon, GlobeIcon, LinkIcon } from "@shopify/polaris-icons";
 import { useState, useMemo, useCallback } from "react";
-import { ViewConfigButton } from "./ViewConfigButton";
-import { CitationGraph } from "./CitationGraph";
+import { ViewConfigButton } from "./shared/ViewConfigButton";
+import { CitationGraph } from "./citation/CitationGraph";
 import { CitationShareCard } from "./citation/CitationShareCard";
 import { CitationRankCard } from "./citation/CitationRankCard";
 import { CitationTypesCard } from "./citation/CitationTypesCard";

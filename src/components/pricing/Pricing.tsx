@@ -1,4 +1,4 @@
-import {
+﻿import {
   Page,
   Layout,
   BlockStack,
@@ -18,10 +18,10 @@ import {
   CheckIcon,
 } from "@shopify/polaris-icons";
 import React, { useState } from "react";
-import { TitleBar } from "./MockTitleBar";
-import { PricingPlanCard } from "./pricing/PricingPlanCard";
-import { ROICalculator } from "./pricing/ROICalculator";
-import { FAQSection } from "./pricing/FAQSection";
+import { TitleBar } from "../MockTitleBar";
+import { PricingPlanCard } from "./PricingPlanCard";
+import { ROICalculator } from "./ROICalculator";
+import { FAQSection } from "./FAQSection";
 
 interface PricingProps {
   activePlan: string;
@@ -54,7 +54,7 @@ export function Pricing({ activePlan, onSelectPlan }: PricingProps) {
       { text: "Runs Weekly (Every 7 Days)" },
       { text: "3 Competitors Tracked" },
       {
-        text: "Real Trio™ (Google AI Overview + ChatGPT + Perplexity)",
+        text: "Real Trioâ„¢ (Google AI Overview + ChatGPT + Perplexity)",
         icons: [],
       },
       { text: "20 Auto-Fix Suggestions/mo" },
@@ -80,7 +80,7 @@ export function Pricing({ activePlan, onSelectPlan }: PricingProps) {
         { text: "Runs Daily (Every 24 Hours)" },
         { text: "10 Competitors Tracked" },
         {
-          text: "Real Trio™ (Google AI Overview + ChatGPT + Perplexity)",
+          text: "Real Trioâ„¢ (Google AI Overview + ChatGPT + Perplexity)",
           icons: [MagicIcon],
         },
         { text: "100 Auto-Fix Suggestions/mo" },
@@ -105,7 +105,7 @@ export function Pricing({ activePlan, onSelectPlan }: PricingProps) {
         { text: "Runs Daily (Every 24 Hours)" },
         { text: "25 Competitors Tracked" },
         {
-          text: "Real Trio™ (Google AI Overview + ChatGPT + Perplexity)",
+          text: "Real Trioâ„¢ (Google AI Overview + ChatGPT + Perplexity)",
           icons: [MagicIcon],
         },
         { text: "500 Auto-Fix Suggestions/mo" },

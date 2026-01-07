@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Pricing } from "../components/Pricing";
+import { Pricing } from "../components/pricing/Pricing";
 
 export default function PricingPage() {
   const [activePlan, setActivePlan] = useState("FREE");

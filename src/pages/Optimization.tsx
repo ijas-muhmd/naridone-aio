@@ -826,29 +826,23 @@ function SitemapContent({
   const proxyUrl = `https://${shop}/apps/shopeec/llms.txt`;
 
   return (
-    <BlockStack gap="600">
-      <Box paddingBlockStart="400" paddingBlockEnd="400" paddingInline="400">
-        <BlockStack gap="500">
-          <Banner tone="info" title="Your AI Sitemap is Live">
-            <p>
-              View it here:{" "}
-              <a
-                href={proxyUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "#2563eb", textDecoration: "underline" }}
-              >
-                {proxyUrl}
-              </a>
-            </p>
-          </Banner>
-        </BlockStack>
-      </Box>
+    <Box paddingBlockStart="400">
+      <BlockStack gap="600">
+        <Banner tone="info" title="Your AI Sitemap is Live">
+          <p>
+            View it here:{" "}
+            <a
+              href={proxyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "#2563eb", textDecoration: "underline" }}
+            >
+              {proxyUrl}
+            </a>
+          </p>
+        </Banner>
 
-      <Box paddingInline="400">
-        <Layout>
-          <Layout.Section>
-            <Card>
+        <Card>
               <BlockStack gap="500">
                 <BlockStack gap="200">
                   <Text variant="headingMd" as="h2">
@@ -905,9 +899,7 @@ function SitemapContent({
                 </BlockStack>
               </BlockStack>
             </Card>
-          </Layout.Section>
-        </Layout>
-      </Box>
-    </BlockStack>
+      </BlockStack>
+    </Box>
   );
 }

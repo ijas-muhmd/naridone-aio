@@ -9,12 +9,12 @@ import {
 } from "@shopify/polaris";
 import { InfoIcon, LinkIcon, GlobeIcon } from "@shopify/polaris-icons";
 import { useState, useMemo } from "react";
-import { ViewConfigButton } from "./ViewConfigButton";
+import { ViewConfigButton } from "./shared/ViewConfigButton";
 import {
   MultiSelectFilters,
   type MultiSelectFilterOptions,
 } from "../MultiSelectFilters";
-import { ExecutionDetailsModal } from "./ExecutionDetailsModal";
+import { ExecutionDetailsModal } from "./tracking/ExecutionDetailsModal";
 import { getThemeDetails } from "./sentiment/utils";
 import { SentimentFilters } from "./sentiment/SentimentFilters";
 import { SentimentChartCard } from "./sentiment/SentimentChartCard";

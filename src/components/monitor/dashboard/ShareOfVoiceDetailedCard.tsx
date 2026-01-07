@@ -8,7 +8,7 @@ import {
   Tooltip,
 } from "@shopify/polaris";
 import { InfoIcon } from "@shopify/polaris-icons";
-import { ShareOfVoiceCard } from "../ShareOfVoiceCard";
+import { ShareOfVoiceCard } from "./ShareOfVoiceCard";
 import React from "react";
 
 interface ShareOfVoiceDetailedCardProps {

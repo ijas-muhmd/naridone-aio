@@ -1,6 +1,6 @@
 import { Card, Text, InlineStack, Icon, Popover, BlockStack } from "@shopify/polaris";
 import { CheckIcon } from "@shopify/polaris-icons";
-import { getPlatformInfo } from "../../utils/platforms";
+import { getPlatformInfo } from "../../../utils/platforms";
 import { useState, Fragment } from "react";
 import { ExecutionDetailsModal, ExecutionDetails } from "./ExecutionDetailsModal";
 

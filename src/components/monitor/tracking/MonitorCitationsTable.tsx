@@ -1,7 +1,7 @@
 import { Card, Text, InlineStack, Icon, Tooltip } from "@shopify/polaris";
 import { InfoIcon, DuplicateIcon, ExternalIcon, NoteIcon, FolderIcon, ChatIcon, MinusIcon } from "@shopify/polaris-icons";
 import { useState } from "react";
-import { getPlatformInfo } from "../../utils/platforms";
+import { getPlatformInfo } from "../../../utils/platforms";
 
 // Category Badge Component (matching MonitorCitation.tsx)
 const CategoryBadge = ({ category }: { category: 'Earned' | 'Owned' | 'Social' }) => {

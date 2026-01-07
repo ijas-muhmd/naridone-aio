@@ -1,7 +1,7 @@
 import { Card, BlockStack, InlineStack, Text, Icon, Tooltip } from "@shopify/polaris";
 import { InfoIcon } from "@shopify/polaris-icons";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip as RechartsTooltip, Cell } from "recharts";
-import { getPlatformInfo } from "../../utils/platforms";
+import { getPlatformInfo } from "../../../../utils/platforms";
 
 interface BarChartDataItem {
     platform: string;

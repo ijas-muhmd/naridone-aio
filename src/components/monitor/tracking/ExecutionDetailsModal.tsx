@@ -2,7 +2,7 @@
 import React from 'react';
 import { Modal, BlockStack, Text, InlineStack, Icon, Button } from "@shopify/polaris";
 import { CalendarIcon, GlobeIcon, ExportIcon } from "@shopify/polaris-icons";
-import { SimpleMarkdownRenderer } from "./SimpleMarkdownRenderer";
+import { SimpleMarkdownRenderer } from "../shared/SimpleMarkdownRenderer";
 
 export interface Citation {
     source: string;

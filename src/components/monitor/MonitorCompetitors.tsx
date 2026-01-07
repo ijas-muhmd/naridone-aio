@@ -9,7 +9,7 @@ import {
 } from "@shopify/polaris";
 import { ViewIcon, NoteIcon } from "@shopify/polaris-icons";
 import { useState } from "react";
-import { ViewConfigButton } from "./ViewConfigButton";
+import { ViewConfigButton } from "./shared/ViewConfigButton";
 import { SuggestedBrandsBanner } from "./competitors/SuggestedBrandsBanner";
 import { CompetitorsGrid } from "./competitors/CompetitorsGrid";
 import { CompetitorsList } from "./competitors/CompetitorsList";

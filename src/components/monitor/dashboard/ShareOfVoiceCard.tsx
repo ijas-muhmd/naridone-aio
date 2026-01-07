@@ -1,7 +1,7 @@
 import { Card, Box, InlineStack, BlockStack, Text, Icon, Badge, Grid, Tooltip as PolarisTooltip } from "@shopify/polaris";
 import { InfoIcon } from "@shopify/polaris-icons";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
-import { ClientOnly } from "../ClientOnly";
+import { ClientOnly } from "../../ClientOnly";
 import { useState } from "react";
 
 const COLORS = [

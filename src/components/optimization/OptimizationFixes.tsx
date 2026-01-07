@@ -15,8 +15,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { RefreshIcon } from "@shopify/polaris-icons";
 import React, { useState } from "react";
-import { FixFilters } from "../FixFilters";
-import { OptimizationNav } from "../SubNavs";
+import { FixFilters } from "./fixes/FixFilters";
 import { FixesTable } from "./fixes/FixesTable";
 import { FixReviewModal } from "./fixes/FixReviewModal";
 import { FixDetailsModal } from "./fixes/FixDetailsModal";

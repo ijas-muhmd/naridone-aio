@@ -1,6 +1,6 @@
 import { Modal, BlockStack, CalloutCard } from "@shopify/polaris";
 import React from "react";
-import { DiffCard } from "../../DiffCard";
+import { DiffCard } from "./DiffCard";
 
 interface FixReviewModalProps {
   open: boolean;
